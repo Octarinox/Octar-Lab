@@ -1,0 +1,18 @@
+# OCTAR LAB v1.0 — Dependencies
+# ─────────────────────────────────────────────────────────────
+
+# UI Framework
+PyQt6>=6.6.0
+
+# Secure credential storage (cross-platform)
+keyring>=24.0.0
+
+# AI Providers
+groq>=0.11.0
+openai>=1.40.0
+anthropic>=0.34.0
+google-genai>=1.0.0
+mistralai>=1.0.0
+
+# Optional formatting tools (used at runtime if installed):
+#   black, autopep8, prettier, rustfmt
