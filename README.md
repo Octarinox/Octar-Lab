@@ -140,7 +140,7 @@ Please follow the existing code style and add tests where appropriate.
 
 ## 📄 License
 
-[MIT](LICENSE) © 2025 Octarinox
+[MIT](LICENSE) © 2026 Octarinox
 
 Free for personal and commercial use. The LICENSE file also contains a
 small non-binding ceremonial clause; we encourage you to read it after
