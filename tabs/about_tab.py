@@ -1,10 +1,3 @@
-"""
-tabs/about_tab.py
-══════════════════════════════════════════════════════════════
-About tab — mission statement, Octarinox info, license,
-contributing links.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from PyQt6.QtCore import Qt, QUrl

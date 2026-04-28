@@ -1,9 +1,3 @@
-"""
-core/ai_providers/anthropic_provider.py
-══════════════════════════════════════════════════════════════
-Anthropic Claude provider (Opus, Sonnet, Haiku).
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from core.ai_providers.base import (

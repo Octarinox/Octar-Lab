@@ -1,9 +1,3 @@
-"""
-core/ai_providers/groq_provider.py
-══════════════════════════════════════════════════════════════
-Groq (LPU-accelerated open models) provider.
-═══════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from core.ai_providers.base import (

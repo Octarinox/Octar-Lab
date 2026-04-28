@@ -1,17 +1,3 @@
-"""
-tabs/database_tab.py
-══════════════════════════════════════════════════════════════
-Database Tools tab.
-Modes:
-  • Design Schema     — natural-language description → DDL + ORM
-  • Optimize Query    — slow query → optimized version + analysis
-  • Generate Migration — describe change → migration up/down scripts
-  • Generate Seed     — describe data → INSERT statements
-  • Explain Query     — query → human-readable explanation
-
-Output is text (SQL or Markdown) — uses SimpleWorker.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -155,7 +141,6 @@ class DatabaseTab(BaseTab):
         self._pending_filename: str = "result.sql"
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -317,7 +302,6 @@ class DatabaseTab(BaseTab):
         self.output.save_requested.connect(self._save_result)
         return self.output
 
-    # ── Mode-driven UI updates ────────────────────────────
     def _on_mode_changed(self, _idx: int):
         mode = self.mode_combo.currentData() or "schema"
 
@@ -348,7 +332,6 @@ class DatabaseTab(BaseTab):
         # Comments are relevant for schema/seed
         self.chk_comments.setEnabled(mode in ("schema", "seed"))
 
-    # ── Actions ───────────────────────────────────────────
     def _paste_input(self):
         text = QApplication.clipboard().text()
         if text:
@@ -455,7 +438,6 @@ class DatabaseTab(BaseTab):
             self.status_signal.emit(t("status.error"), "err")
             QMessageBox.warning(self, t("status.error"), message)
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("db.title"))
         self.lbl_subtitle.setText(t("db.subtitle"))

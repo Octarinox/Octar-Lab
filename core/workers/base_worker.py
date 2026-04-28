@@ -1,15 +1,3 @@
-"""
-core/workers/base_worker.py
-══════════════════════════════════════════════════════════════
-Abstract base class for every generation worker thread.
-Defines the signal contract that all tabs rely on, plus
-shared utilities like markdown-fence stripping and JSON
-extraction.
-
-Subclasses override `_run()` (note: NOT `run()` — that's
-the QThread entry point, which we keep stable).
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import json
@@ -47,7 +35,6 @@ class BaseWorker(QThread):
         self._config = config
         self._stop = False
 
-    # ── Public API ────────────────────────────────────────
     def stop(self):
         """Cooperative cancellation — workers check this between steps."""
         self._stop = True
@@ -56,7 +43,6 @@ class BaseWorker(QThread):
     def is_stopping(self) -> bool:
         return self._stop
 
-    # ── QThread entry point ───────────────────────────────
     def run(self):
         try:
             self._run()
@@ -67,11 +53,9 @@ class BaseWorker(QThread):
             self._log(f"Unexpected error: {e}", "ERR")
             self.done_signal.emit(False, str(e))
 
-    # ── Subclass contract ─────────────────────────────────
     def _run(self):
         raise NotImplementedError("Subclasses must implement _run()")
 
-    # ── Shared helpers ────────────────────────────────────
     def _log(self, message: str, level: str = "INFO"):
         self.log_signal.emit(message, level)
 

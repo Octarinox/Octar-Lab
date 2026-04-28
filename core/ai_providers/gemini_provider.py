@@ -1,17 +1,3 @@
-"""
-core/ai_providers/gemini_provider.py
-══════════════════════════════════════════════════════════════
-Google Gemini provider.
-
-Prefers the new unified Google Gen AI SDK (`google-genai`,
-`from google import genai`). Falls back to the legacy SDK
-(`google-generativeai`) if the new one isn't installed, so
-existing installs keep working — but emits no deprecation
-chatter on the new path.
-
-Migration ref: https://ai.google.dev/gemini-api/docs/migrate
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from core.ai_providers.base import (
@@ -64,7 +50,6 @@ class GeminiProvider(BaseProvider):
             # Legacy SDK — global config
             genai.configure(api_key=api_key)
 
-    # ── Internal: split messages into system_instruction + chat history ──
     @staticmethod
     def _split_messages(messages: list[ChatMessage]):
         """
@@ -85,7 +70,6 @@ class GeminiProvider(BaseProvider):
                 history.append({"role": "user",  "parts": [{"text": m.content}]})
         return system_text, history
 
-    # ── Chat (dispatched on SDK variant) ──────────────────
     def _do_chat(self, messages, model, temperature, max_tokens):
         system_text, history = self._split_messages(messages)
         if SDK_VARIANT == "new":
@@ -145,7 +129,6 @@ class GeminiProvider(BaseProvider):
         )
         return resp.text or ""
 
-    # ── Validation ────────────────────────────────────────
     def validate_key(self) -> tuple[bool, str]:
         try:
             if SDK_VARIANT == "new":

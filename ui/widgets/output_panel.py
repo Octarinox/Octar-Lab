@@ -1,23 +1,3 @@
-"""
-ui/widgets/output_panel.py
-══════════════════════════════════════════════════════════════
-Reusable right-side output panel used by every "single-result"
-tab in Phase 2 (Refactor, Docs, Tests, etc.).
-
-Composition:
-  - Progress bar at top
-  - Tab strip with two pages:
-      • Live Logs    (QPlainTextEdit, read-only)
-      • Code/Result  (QPlainTextEdit, editable, syntax-highlighted)
-
-Public API:
-  - log(message, level)        — append a log line
-  - set_progress(percent)
-  - set_result(text, filename)  — populate the result tab and switch to it
-  - clear()                     — reset everything
-  - copy_signal, save_signal    — fired when toolbar buttons clicked
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import datetime
@@ -142,7 +122,6 @@ class OutputPanel(QWidget):
         layout.addWidget(self.result_view)
         return w
 
-    # ── Public API ────────────────────────────────────────
     def log(self, message: str, level: str = "INFO"):
         icon = LEVEL_ICONS.get(level, "·")
         ts = datetime.datetime.now().strftime("%H:%M:%S")
@@ -170,7 +149,6 @@ class OutputPanel(QWidget):
     def show_processing(self):
         self.result_filename.setText(t("shared.processing_placeholder"))
 
-    # ── i18n re-bind (called by parent tabs) ──────────────
     def retranslate(self):
         self.progress_label.setText(t("shared.progress_label"))
         self.tabs.setTabText(0, t("shared.live_log_tab"))

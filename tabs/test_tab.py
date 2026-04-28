@@ -1,14 +1,3 @@
-"""
-tabs/test_tab.py
-══════════════════════════════════════════════════════════════
-Test Generator tab.
-Generates unit, integration, end-to-end, or property-based
-tests for existing code. Framework selection is dynamic and
-keyed off the chosen language.
-
-Uses SimpleWorker — single-prompt, single-response.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -127,7 +116,6 @@ class TestGenTab(BaseTab):
         self._pending_filename: str = "test_result.py"
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -288,7 +276,6 @@ class TestGenTab(BaseTab):
         self.output.save_requested.connect(self._save_result)
         return self.output
 
-    # ── Combo updates ─────────────────────────────────────
     def _populate_frameworks(self):
         lang = self.lang_combo.currentText()
         frameworks = FRAMEWORKS_BY_LANGUAGE.get(lang, ["generic"])
@@ -298,7 +285,6 @@ class TestGenTab(BaseTab):
     def _on_language_changed_combo(self, _new_lang: str):
         self._populate_frameworks()
 
-    # ── Actions ───────────────────────────────────────────
     def _paste_input(self):
         text = QApplication.clipboard().text()
         if text:
@@ -415,7 +401,6 @@ class TestGenTab(BaseTab):
                 return ext
         return ".txt"
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("tests.title"))
         self.lbl_subtitle.setText(t("tests.subtitle"))

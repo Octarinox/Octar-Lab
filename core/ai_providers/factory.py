@@ -1,11 +1,3 @@
-"""
-core/ai_providers/factory.py
-══════════════════════════════════════════════════════════════
-Single entry-point for instantiating AI providers. Hides the
-actual class names from callers — `ProviderFactory.create("groq", key)`
-just works.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from typing import Optional, Type

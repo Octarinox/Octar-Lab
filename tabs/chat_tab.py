@@ -1,15 +1,3 @@
-"""
-tabs/chat_tab.py
-══════════════════════════════════════════════════════════════
-AI Chat Console tab.
-Open-ended multi-turn conversation with the configured AI
-provider. Supports a custom system prompt, message bubbles
-with role-coloured styling, conversation export to Markdown,
-keyboard shortcut (Ctrl+Enter) to send.
-
-Uses ChatWorker — sends full conversation history each turn.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import datetime
@@ -46,7 +34,6 @@ class ChatTab(BaseTab):
         self._build_ui()
         self._refresh_transcript()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -225,7 +212,6 @@ class ChatTab(BaseTab):
 
         return panel
 
-    # ── Counter helper ────────────────────────────────────
     def _counter_text(self) -> str:
         n = len(self._messages)
         approx_tokens = sum(len(m["content"]) for m in self._messages) // 4
@@ -234,7 +220,6 @@ class ChatTab(BaseTab):
     def _update_counters(self):
         self.msg_count_label.setText(self._counter_text())
 
-    # ── Transcript rendering ──────────────────────────────
     def _refresh_transcript(self):
         """Re-render the entire transcript from self._messages."""
         if not self._messages:
@@ -346,7 +331,6 @@ class ChatTab(BaseTab):
         )
         return html
 
-    # ── System prompt actions ─────────────────────────────
     def _on_apply_system(self):
         text = self.system_input.toPlainText().strip()
         self._system_prompt = text
@@ -360,7 +344,6 @@ class ChatTab(BaseTab):
         self._system_prompt = ""
         self.status_signal.emit("System prompt reset", "info")
 
-    # ── Send / Stop / Clear / Export ──────────────────────
     def _on_send(self):
         if self._worker and self._worker.isRunning():
             return  # already busy
@@ -476,7 +459,6 @@ class ChatTab(BaseTab):
         except OSError as e:
             QMessageBox.warning(self, "—", f"Export failed: {e}")
 
-    # ── Worker callbacks ──────────────────────────────────
     def _on_worker_log(self, _message: str, _level: str):
         # We don't surface chat worker logs to the UI by default — too noisy
         # Could be wired to a hidden debug log if useful later.
@@ -514,7 +496,6 @@ class ChatTab(BaseTab):
         ))
         self._update_counters()
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.title_label.setText(t("chat.title"))
         self.subtitle_label.setText(t("chat.subtitle"))

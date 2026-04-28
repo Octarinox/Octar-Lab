@@ -1,9 +1,3 @@
-"""
-core/ai_providers/mistral_provider.py
-══════════════════════════════════════════════════════════════
-Mistral AI provider.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from core.ai_providers.base import (

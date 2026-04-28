@@ -1,10 +1,3 @@
-"""
-ui/widgets/glow_label.py
-══════════════════════════════════════════════════════════════
-Title label with a pulsing violet glow behind the text.
-Used for the main app header.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from PyQt6.QtCore import Qt, QTimer

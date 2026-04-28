@@ -1,11 +1,3 @@
-"""
-tabs/settings_tab.py
-══════════════════════════════════════════════════════════════
-Settings tab: API key management, language, output directory,
-and per-provider model selection. Keys are written to the OS
-keyring via core/secrets.py.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import threading
@@ -42,7 +34,6 @@ class SettingsTab(BaseTab):
         self._provider_blocks: dict[str, dict] = {}
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         outer = QVBoxLayout(self)
         outer.setContentsMargins(12, 12, 12, 12)
@@ -286,7 +277,6 @@ class SettingsTab(BaseTab):
         }
         return block
 
-    # ── Event handlers ────────────────────────────────────
     def _on_language_combo_changed(self, _idx: int):
         new_lang = self.lang_combo.currentData()
         if not new_lang or new_lang == self.settings.language:
@@ -388,7 +378,6 @@ class SettingsTab(BaseTab):
         self.settings.save()
         self.settings_changed.emit()
 
-    # ── i18n re-bind ──────────────────────────────────────
     def on_language_changed(self):
         self.general_group.setTitle(t("settings.general_group"))
         self.lbl_language.setText(t("settings.language_label"))

@@ -1,17 +1,3 @@
-"""
-tabs/api_builder_tab.py
-══════════════════════════════════════════════════════════════
-API Builder tab.
-Generates REST, GraphQL, or gRPC endpoint scaffolding —
-multi-file output via MultiFileWorker.
-
-Framework selection is dynamic and tied to the chosen API
-style:
-  • REST    → FastAPI, Express, Spring Boot, NestJS, Flask, Gin, Axum, …
-  • GraphQL → Apollo Server, Strawberry, GraphQL Ruby, …
-  • gRPC    → grpcio (Python), tonic (Rust), grpc-go, …
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import os
@@ -104,7 +90,6 @@ class APIBuilderTab(BaseTab):
         self._last_output_dir: str | None = None
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -343,7 +328,6 @@ class APIBuilderTab(BaseTab):
         layout.addWidget(self.code_view)
         return w
 
-    # ── Reactive UI ───────────────────────────────────────
     def _on_style_changed(self, _idx: int):
         self._populate_frameworks()
 
@@ -353,7 +337,6 @@ class APIBuilderTab(BaseTab):
         self.framework_combo.clear()
         self.framework_combo.addItems(frameworks)
 
-    # ── Generation ────────────────────────────────────────
     def _start_run(self):
         name = self.name_input.text().strip()
         desc = self.desc_input.toPlainText().strip()
@@ -439,7 +422,6 @@ class APIBuilderTab(BaseTab):
             self._worker.stop()
         self.stop_btn.setEnabled(False)
 
-    # ── Worker callbacks ──────────────────────────────────
     def _on_log(self, message: str, level: str):
         from core.logger import LEVEL_ICONS
         import datetime
@@ -479,7 +461,6 @@ class APIBuilderTab(BaseTab):
             self.status_signal.emit(t("status.error"), "err")
             QMessageBox.warning(self, t("status.error"), message)
 
-    # ── Preview tools ─────────────────────────────────────
     def _copy_preview(self):
         text = self.code_view.toPlainText()
         if text:
@@ -511,7 +492,6 @@ class APIBuilderTab(BaseTab):
         except Exception as e:
             QMessageBox.warning(self, "—", f"Could not open folder: {e}")
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("api.title"))
         self.lbl_subtitle.setText(t("api.subtitle"))

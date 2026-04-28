@@ -1,20 +1,3 @@
-"""
-tabs/devops_tab.py
-══════════════════════════════════════════════════════════════
-DevOps Templates tab.
-Generates production-grade infrastructure templates:
-  • Dockerfile (single or multi-stage)
-  • docker-compose.yml
-  • GitHub Actions / GitLab CI workflows
-  • Makefile
-  • Kubernetes manifests (Deployment + Service + Ingress)
-  • Terraform modules
-  • Nginx configuration
-  • systemd unit files
-
-Single-file output — uses SimpleWorker.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -246,15 +229,12 @@ def build_system_prompt(kind: str, target: str,
 
 
 class DevOpsTab(BaseTab):
-    """Generate DevOps templates."""
-
     def __init__(self, settings: AppSettings, parent=None):
         super().__init__(settings, parent)
         self._worker: SimpleWorker | None = None
         self._pending_filename: str = "Dockerfile"
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -401,7 +381,6 @@ class DevOpsTab(BaseTab):
         self.output.save_requested.connect(self._save_result)
         return self.output
 
-    # ── Actions ───────────────────────────────────────────
     def _paste_input(self):
         text = QApplication.clipboard().text()
         if text:
@@ -498,7 +477,6 @@ class DevOpsTab(BaseTab):
             self.status_signal.emit(t("status.error"), "err")
             QMessageBox.warning(self, t("status.error"), message)
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("devops.title"))
         self.lbl_subtitle.setText(t("devops.subtitle"))

@@ -1,11 +1,3 @@
-"""
-ui/highlighters/code_highlighter.py
-══════════════════════════════════════════════════════════════
-A pragmatic, multi-language syntax highlighter that recognises
-keywords from the most common languages we generate. Not a
-full lexer — just enough to make the preview pleasant to read.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import re

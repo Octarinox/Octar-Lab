@@ -1,11 +1,3 @@
-"""
-core/config.py
-══════════════════════════════════════════════════════════════
-Application-wide configuration: paths, defaults, constants.
-User preferences are persisted to a JSON file in the user's
-config directory (XDG-compliant on Linux, AppData on Windows).
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import json

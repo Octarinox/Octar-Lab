@@ -1,14 +1,3 @@
-"""
-main.py
-══════════════════════════════════════════════════════════════
-Octar Lab — application entry point.
-
-Builds the main window, registers all 13 tabs, applies the
-"Cosmic Violet" stylesheet, and wires the cross-cutting
-signals (settings changes propagating to every tab, language
-changes triggering UI re-translation).
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import os
@@ -78,7 +67,6 @@ class MainWindow(QMainWindow):
         self._build_status_bar()
         self._wire_signals()
 
-    # ── Window setup ──────────────────────────────────────
     def _build_window(self):
         self.setWindowTitle(f"{APP_NAME} v{APP_VERSION}")
         self.resize(1480, 900)
@@ -195,7 +183,6 @@ class MainWindow(QMainWindow):
                 tab.settings_changed.connect(self._on_settings_changed)
                 break
 
-    # ── Signal handlers ───────────────────────────────────
     def _on_tab_status(self, message: str, level: str):
         self.status_label.setText(message)
         color_map = {
@@ -250,7 +237,6 @@ class MainWindow(QMainWindow):
                 print(f"[main] Settings refresh failed for {type(tab).__name__}: {e}",
                       file=sys.stderr)
 
-    # ── Menu actions ──────────────────────────────────────
     def _open_output_folder(self):
         target = self.settings.output_directory
         Path(target).mkdir(parents=True, exist_ok=True)

@@ -1,14 +1,5 @@
-"""
-ui/theme.py
-══════════════════════════════════════════════════════════════
-Centralised color palette and typography for OCTAR LAB.
-Theme is "Cosmic Violet" — deep black/charcoal backgrounds
-with violet primary and lilac accents.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
-# ── Color Palette ─────────────────────────────────────────────
 PALETTE = {
     # Surfaces (darkest → lightest)
     "bg_void":       "#08080f",
@@ -49,7 +40,6 @@ PALETTE = {
 }
 
 
-# ── Typography ─────────────────────────────────────────────
 FONT_STACK_MONO = (
     "'JetBrains Mono', 'Fira Code', 'Cascadia Code', "
     "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace"
@@ -67,7 +57,6 @@ FONT_SIZE_HEADER   = 22
 
 
 def color(name: str, fallback: str = "#ffffff") -> str:
-    """Safe palette lookup."""
     return PALETTE.get(name, fallback)
 
 

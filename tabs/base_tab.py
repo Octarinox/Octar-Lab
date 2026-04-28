@@ -1,11 +1,3 @@
-"""
-tabs/base_tab.py
-══════════════════════════════════════════════════════════════
-Shared base class for all tabs. Provides common helpers like
-section labels, separator lines, and a uniform constructor
-contract (every tab receives the AppSettings instance).
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from PyQt6.QtCore import pyqtSignal
@@ -29,7 +21,6 @@ class BaseTab(QWidget):
         super().__init__(parent)
         self.settings = settings
 
-    # ── Lifecycle hooks (override as needed) ──────────────
     def on_settings_changed(self) -> None:
         """Called when settings are saved elsewhere — refresh UI bindings here."""
         pass
@@ -38,7 +29,6 @@ class BaseTab(QWidget):
         """Called when the user switches UI language — re-translate labels here."""
         pass
 
-    # ── Shared widget helpers ─────────────────────────────
     @staticmethod
     def section_label(text: str) -> QLabel:
         lbl = QLabel(text)

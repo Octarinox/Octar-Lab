@@ -1,12 +1,3 @@
-"""
-core/i18n.py
-══════════════════════════════════════════════════════════════
-Translation loader. Translations live as JSON files under
-resources/translations/{lang}.json and are flat key→string
-maps. Missing keys fall back to English, then to the key
-itself, so the UI never crashes on a missing translation.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import json

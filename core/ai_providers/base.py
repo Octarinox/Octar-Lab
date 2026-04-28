@@ -1,12 +1,3 @@
-"""
-core/ai_providers/base.py
-══════════════════════════════════════════════════════════════
-Abstract interface every AI provider implementation must
-satisfy. The rest of the application only ever talks to
-this interface, so adding a new provider is a single file
-change plus registering it in factory.py.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
@@ -50,7 +41,6 @@ class BaseProvider(ABC):
             raise ValueError("API key is required")
         self.api_key = api_key
 
-    # ── Public API ─────────────────────────────────────────
 
     def chat(
         self,
@@ -90,7 +80,6 @@ class BaseProvider(ABC):
         messages.append(ChatMessage(role="user", content=prompt))
         return self.chat(messages, model, temperature, max_tokens)
 
-    # ── Subclass contract ──────────────────────────────────
 
     @abstractmethod
     def _do_chat(

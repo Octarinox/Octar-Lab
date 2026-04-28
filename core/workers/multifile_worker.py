@@ -1,30 +1,3 @@
-"""
-core/workers/multifile_worker.py
-══════════════════════════════════════════════════════════════
-Generic two-stage worker:
-  1) Ask the architect model for a JSON plan (list of files).
-  2) Generate each file with the coder model.
-
-Used by Library Generator, UI Component Generator, Database
-Tools — anything that produces multiple related files but is
-narrower in scope than a full project (Architect tab).
-
-Config schema:
-  {
-    "name":            str,
-    "description":     str,
-    "language":        str,
-    "kind":            str,    # "library" | "component" | "schema" — for prompt phrasing
-    "extra_instructions": str, # optional additional constraints
-    "max_files":       int,
-    "temperature":     float,
-    "output_dir":      str,
-    "provider_id":     str,
-    "architect_model": str,
-    "coder_model":     str,
-  }
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import re
@@ -142,7 +115,6 @@ class MultiFileWorker(BaseWorker):
         self._log(f"🎉 {kind.title()} '{name}' complete: {out_base}", "OK")
         self.done_signal.emit(True, str(out_base.resolve()))
 
-    # ── Prompt builders ───────────────────────────────────
     @staticmethod
     def _plan_prompt(name: str, desc: str, lang: str, kind_desc: str,
                      extra: str, max_files: int) -> str:

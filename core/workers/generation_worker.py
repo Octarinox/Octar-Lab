@@ -1,11 +1,3 @@
-"""
-core/workers/generation_worker.py
-══════════════════════════════════════════════════════════════
-Background QThread that drives the architect tab's generation
-pipeline. Decoupled from the UI through Qt signals so the
-same worker can be reused by other tabs in the future.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import datetime
@@ -44,11 +36,9 @@ class GenerationWorker(QThread):
     def stop(self):
         self._stop = True
 
-    # ── Internal logging shortcut ─────────────────────────
     def _log(self, msg: str, level: str = "INFO"):
         self.log_signal.emit(msg, level)
 
-    # ── Main thread entry point ───────────────────────────
     def run(self):
         try:
             self._generate()
@@ -59,7 +49,6 @@ class GenerationWorker(QThread):
             self._log(f"Unexpected error: {e}", "ERR")
             self.done_signal.emit(False, str(e))
 
-    # ── Generation pipeline ───────────────────────────────
     def _generate(self):
         cfg          = self._config
         name         = cfg["name"]
@@ -163,7 +152,6 @@ class GenerationWorker(QThread):
         self._log(f"🎉 Project '{name}' complete: {out_base}", "OK")
         self.done_signal.emit(True, str(out_base.resolve()))
 
-    # ── Prompt builders ───────────────────────────────────
     def _architect_prompt(self, name: str, desc: str, lang: str, max_files: int) -> str:
         return f"""You are an elite software architect. Design a complete, production-ready project.
 
@@ -225,7 +213,6 @@ Requirements:
             self._log(f"   ⚠ AI error for {path}: {e}", "WARN")
             return f"# Generation failed for {path}\n# Error: {e}\n"
 
-    # ── README / deps / gitignore generators ──────────────
     @staticmethod
     def _gen_readme(plan: dict, name: str, desc: str, language: str) -> str:
         deps = plan.get("dependencies", {}) or {}
@@ -361,7 +348,6 @@ MIT © {year}
         base.extend(["", "# IDEs", ".vscode/", ".idea/", "*.swp", "*.swo", ""])
         return "\n".join(base)
 
-    # ── Helpers ───────────────────────────────────────────
     @staticmethod
     def _git_init(path: Path):
         if not shutil.which("git"):

@@ -1,11 +1,3 @@
-"""
-tabs/placeholder_tab.py
-══════════════════════════════════════════════════════════════
-Polished "coming in next phase" placeholder. Subclassed by each
-of the upcoming feature tabs so they appear in the UI now and
-hot-swap to real implementations later without main.py changes.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from PyQt6.QtCore import Qt

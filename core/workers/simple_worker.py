@@ -1,24 +1,3 @@
-"""
-core/workers/simple_worker.py
-══════════════════════════════════════════════════════════════
-Worker for single-shot prompt → response operations.
-Used by Refactor, Documentation Generator, Test Generator,
-UI Component Generator — anything that takes one prompt and
-produces one chunk of output.
-
-Config schema:
-  {
-    "system_prompt":   str,    # system message
-    "user_prompt":     str,    # user message
-    "provider_id":     str,    # "groq" | "openai" | etc.
-    "model":           str,    # model name
-    "temperature":     float,
-    "max_tokens":      int,
-    "strip_fences":    bool,   # strip ``` fences from output
-    "log_label":       str,    # "Refactoring code" / "Generating tests" / etc.
-  }
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from core.ai_providers.factory import ProviderFactory

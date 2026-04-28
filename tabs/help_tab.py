@@ -1,12 +1,3 @@
-"""
-tabs/help_tab.py
-══════════════════════════════════════════════════════════════
-In-app documentation. A sidebar lists topics, the main pane
-renders markdown content. Topics are loaded from
-resources/docs/{topic}.md if available, otherwise falls back
-to a built-in default for that topic.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -271,7 +262,6 @@ class HelpTab(BaseTab):
         for label_key, _, _ in self._SECTIONS:
             QListWidgetItem(t(label_key), self.sidebar)
 
-    # ── Loading ───────────────────────────────────────────
     def _on_section_changed(self, row: int):
         if row < 0 or row >= len(self._SECTIONS):
             return
@@ -300,7 +290,6 @@ class HelpTab(BaseTab):
         # QTextBrowser supports basic markdown via setMarkdown
         self.content.setMarkdown(markdown)
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.title_label.setText(t("help.title"))
         # Re-label sidebar items in-place (preserves selection)

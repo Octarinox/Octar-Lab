@@ -1,9 +1,3 @@
-"""
-core/ai_providers/openai_provider.py
-══════════════════════════════════════════════════════════════
-OpenAI (GPT-4o, GPT-4 Turbo, o1) provider.
-═══════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from core.ai_providers.base import (

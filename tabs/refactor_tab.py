@@ -1,17 +1,3 @@
-"""
-tabs/refactor_tab.py
-══════════════════════════════════════════════════════════════
-Code Refactor & Review tab.
-Modes:
-  • Refactor      — clean up, idiomatic rewrite
-  • Security      — review for vulnerabilities
-  • Performance   — review for perf bottlenecks
-  • Explain       — line-by-line explanation
-  • Modernize     — convert to latest syntax/idioms
-
-The output is plain text (or code) — uses SimpleWorker.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -126,7 +112,6 @@ class RefactorTab(BaseTab):
         self._pending_filename: str = "result"
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -277,7 +262,6 @@ class RefactorTab(BaseTab):
         self.output.save_requested.connect(self._save_result)
         return self.output
 
-    # ── Actions ───────────────────────────────────────────
     def _paste_input(self):
         clipboard = QApplication.clipboard()
         text = clipboard.text()
@@ -315,7 +299,6 @@ class RefactorTab(BaseTab):
             except OSError as e:
                 QMessageBox.warning(self, "—", f"Save failed: {e}")
 
-    # ── Generation ────────────────────────────────────────
     def _start_run(self):
         code = self.input_view.toPlainText().strip()
         if not code:
@@ -408,7 +391,6 @@ class RefactorTab(BaseTab):
             self.status_signal.emit(t("status.error"), "err")
             QMessageBox.warning(self, t("status.error"), message)
 
-    # ── Helpers ───────────────────────────────────────────
     @staticmethod
     def _extension_for_language(lang: str) -> str:
         lang_lower = lang.lower()
@@ -437,7 +419,6 @@ class RefactorTab(BaseTab):
                 return ext
         return ".txt"
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("refactor.title"))
         self.lbl_subtitle.setText(t("refactor.subtitle"))

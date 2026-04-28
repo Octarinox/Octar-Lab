@@ -1,10 +1,3 @@
-"""
-ui/widgets/pulsing_dot.py
-══════════════════════════════════════════════════════════════
-A small pulsing dot used as an "activity in progress" indicator
-in the status bar.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from PyQt6.QtCore import QTimer

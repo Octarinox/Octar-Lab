@@ -1,12 +1,3 @@
-"""
-core/logger.py
-══════════════════════════════════════════════════════════════
-Tiny logging utility shared across workers and tabs.
-Each log line is timestamped and tagged with a level icon.
-A subscribe()/publish() model lets UI widgets receive log
-messages without coupling workers directly to widgets.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import datetime

@@ -1,16 +1,3 @@
-"""
-core/secrets.py
-══════════════════════════════════════════════════════════════
-Secure storage for API keys via the OS keyring:
-  • macOS  → Keychain
-  • Windows → Credential Manager
-  • Linux  → Secret Service (GNOME Keyring / KWallet)
-
-If keyring fails (headless Linux without DBus, etc.), we fall
-back to an in-memory dict so the app still runs. Keys held in
-memory are lost when the process exits — by design.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import sys

@@ -1,17 +1,3 @@
-"""
-tabs/ui_component_tab.py
-══════════════════════════════════════════════════════════════
-UI Component Generator tab.
-Generates React, Vue, Svelte, SolidJS, or plain-HTML components
-from a description. Two modes:
-  • Single-file → SimpleWorker
-  • Multi-file (component + styles + tests + story) → MultiFileWorker
-
-Has a "Preview in browser" button that's only active for plain
-HTML output — opens the generated content in the user's default
-browser via QDesktopServices.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import os
@@ -145,7 +131,6 @@ class UIComponentTab(BaseTab):
         self._pending_filename: str = "Component.tsx"
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -387,7 +372,6 @@ class UIComponentTab(BaseTab):
         layout.addWidget(self.code_view)
         return w
 
-    # ── Reactive UI ───────────────────────────────────────
     def _on_framework_changed(self, _idx: int):
         # Update the styling combo's relevance hint
         # (we don't disable options — different stylings are valid per framework)
@@ -415,7 +399,6 @@ class UIComponentTab(BaseTab):
         else:
             self.preview_btn.setToolTip("")
 
-    # ── Generation ────────────────────────────────────────
     def _start_run(self):
         name = self.name_input.text().strip()
         desc = self.desc_input.toPlainText().strip()
@@ -540,7 +523,6 @@ class UIComponentTab(BaseTab):
             self._multifile_worker.stop()
         self.stop_btn.setEnabled(False)
 
-    # ── Worker callbacks ──────────────────────────────────
     def _on_log(self, message: str, level: str):
         from core.logger import LEVEL_ICONS
         import datetime
@@ -609,7 +591,6 @@ class UIComponentTab(BaseTab):
             self.status_signal.emit(t("status.error"), "err")
             QMessageBox.warning(self, t("status.error"), message)
 
-    # ── Preview / file actions ────────────────────────────
     def _preview_in_browser(self):
         text = self.code_view.toPlainText()
         if not text.strip():
@@ -663,7 +644,6 @@ class UIComponentTab(BaseTab):
         except Exception as e:
             QMessageBox.warning(self, "—", f"Could not open folder: {e}")
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("ui_comp.title"))
         self.lbl_subtitle.setText(t("ui_comp.subtitle"))

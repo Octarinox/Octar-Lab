@@ -1,11 +1,3 @@
-"""
-core/workers/chat_worker.py
-══════════════════════════════════════════════════════════════
-Worker for multi-turn chat conversations.
-Sends full conversation history (system + user/assistant turns)
-and emits the assistant's reply via result_signal.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from core.ai_providers.base import ChatMessage

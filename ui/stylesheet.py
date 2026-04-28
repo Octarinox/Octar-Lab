@@ -1,11 +1,3 @@
-"""
-ui/stylesheet.py
-══════════════════════════════════════════════════════════════
-Builds the application-wide Qt Style Sheet (QSS) from the
-palette in ui/theme.py. Pulled out into its own module so the
-palette and the styling rules can evolve independently.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from ui.theme import PALETTE as P, FONT_STACK_MONO
@@ -13,9 +5,7 @@ from ui.theme import PALETTE as P, FONT_STACK_MONO
 
 def build_stylesheet() -> str:
     return f"""
-    /* ═══════════════════════════════════════════════════════ */
-    /*   GLOBAL                                               */
-    /* ═══════════════════════════════════════════════════════ */
+    /* GLOBAL */
     QMainWindow, QWidget, QDialog {{
         background-color: {P['bg_deep']};
         color: {P['text_prim']};
@@ -23,9 +13,7 @@ def build_stylesheet() -> str:
         font-size: 13px;
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   GROUP BOX                                            */
-    /* ═══════════════════════════════════════════════════════ */
+    /* GROUP BOX */
     QGroupBox {{
         background-color: {P['bg_card']};
         border: 1px solid {P['border']};
@@ -44,9 +32,7 @@ def build_stylesheet() -> str:
         letter-spacing: 1px;
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   INPUTS                                               */
-    /* ═══════════════════════════════════════════════════════ */
+    /* INPUTS */
     QLineEdit, QTextEdit, QPlainTextEdit {{
         background-color: {P['bg_card']};
         border: 1px solid {P['border']};
@@ -64,9 +50,7 @@ def build_stylesheet() -> str:
         background-color: {P['bg_panel']};
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   COMBO BOX                                            */
-    /* ═══════════════════════════════════════════════════════ */
+    /* COMBO BOX */
     QComboBox {{
         background-color: {P['bg_card']};
         border: 1px solid {P['border']};
@@ -93,9 +77,7 @@ def build_stylesheet() -> str:
         padding: 4px;
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   BUTTONS                                              */
-    /* ═══════════════════════════════════════════════════════ */
+    /* BUTTONS */
     QPushButton {{
         background-color: {P['bg_card']};
         border: 1px solid {P['border']};
@@ -173,9 +155,7 @@ def build_stylesheet() -> str:
         color: {P['accent']};
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   PROGRESS BAR                                         */
-    /* ═══════════════════════════════════════════════════════ */
+    /* PROGRESS BAR */
     QProgressBar {{
         background-color: {P['bg_card']};
         border: 1px solid {P['border']};
@@ -191,9 +171,7 @@ def build_stylesheet() -> str:
         border-radius: 5px;
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   TABS                                                 */
-    /* ═══════════════════════════════════════════════════════ */
+    /* TABS */
     QTabWidget::pane {{
         background-color: {P['bg_panel']};
         border: 1px solid {P['border']};
@@ -222,9 +200,7 @@ def build_stylesheet() -> str:
         color: {P['text_prim']};
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   TREE WIDGET                                          */
-    /* ═══════════════════════════════════════════════════════ */
+    /* TREE WIDGET */
     QTreeWidget {{
         background-color: {P['bg_card']};
         border: 1px solid {P['border']};
@@ -247,17 +223,13 @@ def build_stylesheet() -> str:
         font-weight: bold;
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   SPLITTER                                             */
-    /* ═══════════════════════════════════════════════════════ */
+    /* SPLITTER */
     QSplitter::handle {{ background-color: {P['border']}; }}
     QSplitter::handle:horizontal {{ width: 2px; }}
     QSplitter::handle:vertical   {{ height: 2px; }}
     QSplitter::handle:hover {{ background-color: {P['primary']}; }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   SCROLLBARS                                           */
-    /* ═══════════════════════════════════════════════════════ */
+    /* SCROLLBARS */
     QScrollBar:vertical {{
         background: {P['bg_card']};
         width: 10px; border-radius: 5px;
@@ -281,9 +253,7 @@ def build_stylesheet() -> str:
     QScrollBar::handle:horizontal:hover {{ background: {P['primary']}; }}
     QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {{ width: 0; }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   CHECK BOX                                            */
-    /* ═══════════════════════════════════════════════════════ */
+    /* CHECK BOX */
     QCheckBox {{ color: {P['text_sec']}; spacing: 8px; }}
     QCheckBox::indicator {{
         width: 16px; height: 16px;
@@ -297,9 +267,7 @@ def build_stylesheet() -> str:
     }}
     QCheckBox:hover {{ color: {P['text_prim']}; }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   SPIN / SLIDER                                        */
-    /* ═══════════════════════════════════════════════════════ */
+    /* SPIN / SLIDER */
     QSpinBox {{
         background: {P['bg_card']};
         border: 1px solid {P['border']};
@@ -327,9 +295,7 @@ def build_stylesheet() -> str:
         border-radius: 3px;
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   LABELS                                               */
-    /* ═══════════════════════════════════════════════════════ */
+    /* LABELS */
     QLabel#header {{
         font-size: 22px; font-weight: 800;
         color: {P['text_prim']}; letter-spacing: 1px;
@@ -347,9 +313,7 @@ def build_stylesheet() -> str:
     QLabel#error {{ color: {P['danger']}; }}
     QLabel#success {{ color: {P['success']}; }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   STATUS / MENU                                        */
-    /* ═══════════════════════════════════════════════════════ */
+    /* STATUS / MENU */
     QStatusBar {{
         background-color: {P['bg_panel']};
         border-top: 1px solid {P['border']};
@@ -385,9 +349,7 @@ def build_stylesheet() -> str:
         margin: 4px 8px;
     }}
 
-    /* ═══════════════════════════════════════════════════════ */
-    /*   TOOLTIP                                              */
-    /* ═══════════════════════════════════════════════════════ */
+    /* TOOLTIP */
     QToolTip {{
         background-color: {P['bg_elevated']};
         color: {P['text_prim']};

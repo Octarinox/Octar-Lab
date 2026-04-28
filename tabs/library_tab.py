@@ -1,12 +1,3 @@
-"""
-tabs/library_tab.py
-══════════════════════════════════════════════════════════════
-Library Generator tab.
-Generates a focused, single-purpose library — narrower in scope
-than a full project (Architect tab). Multi-file output via
-MultiFileWorker.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import os
@@ -55,7 +46,6 @@ class LibraryTab(BaseTab):
         self._last_output_dir: str | None = None
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -270,7 +260,6 @@ class LibraryTab(BaseTab):
         layout.addWidget(self.code_view)
         return w
 
-    # ── Generation ────────────────────────────────────────
     def _start_run(self):
         name = self.name_input.text().strip()
         desc = self.desc_input.toPlainText().strip()
@@ -338,7 +327,6 @@ class LibraryTab(BaseTab):
             self._worker.stop()
         self.stop_btn.setEnabled(False)
 
-    # ── Worker callbacks ──────────────────────────────────
     def _on_log(self, message: str, level: str):
         from core.logger import LEVEL_ICONS
         import datetime
@@ -381,7 +369,6 @@ class LibraryTab(BaseTab):
             self.status_signal.emit(t("status.error"), "err")
             QMessageBox.critical(self, t("status.error"), message)
 
-    # ── Preview tools ─────────────────────────────────────
     def _copy_preview(self):
         text = self.code_view.toPlainText()
         if text:
@@ -413,7 +400,6 @@ class LibraryTab(BaseTab):
         except Exception as e:
             QMessageBox.warning(self, "—", f"Could not open folder: {e}")
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("library.title"))
         self.lbl_subtitle.setText(t("library.subtitle"))

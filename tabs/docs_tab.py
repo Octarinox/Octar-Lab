@@ -1,13 +1,3 @@
-"""
-tabs/docs_tab.py
-══════════════════════════════════════════════════════════════
-Documentation Generator tab.
-Generates README, API references, inline docs/docstrings,
-tutorials, or changelog drafts from source code.
-
-Uses SimpleWorker — single-prompt, single-response.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -138,7 +128,6 @@ class DocsGenTab(BaseTab):
         self._pending_filename: str = "result.md"
         self._build_ui()
 
-    # ── UI Construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -288,7 +277,6 @@ class DocsGenTab(BaseTab):
         self.output.save_requested.connect(self._save_result)
         return self.output
 
-    # ── Actions ───────────────────────────────────────────
     def _paste_input(self):
         text = QApplication.clipboard().text()
         if text:
@@ -411,7 +399,6 @@ class DocsGenTab(BaseTab):
                 return ext
         return ".txt"
 
-    # ── i18n ──────────────────────────────────────────────
     def on_language_changed(self):
         self.cfg_group.setTitle(t("docs.title"))
         self.lbl_subtitle.setText(t("docs.subtitle"))

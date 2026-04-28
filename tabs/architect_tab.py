@@ -1,11 +1,3 @@
-"""
-tabs/architect_tab.py
-══════════════════════════════════════════════════════════════
-The Project Architect tab — flagship feature of Octar Lab.
-Generates complete production-ready project scaffolds via
-the configured AI provider.
-══════════════════════════════════════════════════════════════
-"""
 from __future__ import annotations
 
 import os
@@ -54,7 +46,6 @@ class ArchitectTab(BaseTab):
         self._last_output_dir: str | None = None
         self._build_ui()
 
-    # ── UI construction ───────────────────────────────────
     def _build_ui(self):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(12, 12, 12, 12)
@@ -77,7 +68,6 @@ class ArchitectTab(BaseTab):
         layout.setContentsMargins(4, 4, 8, 4)
         layout.setSpacing(10)
 
-        # ── Configuration ─────────────────────────────────
         cfg = QGroupBox(t("architect.title"))
         self._cfg_group = cfg
         cfg_layout = QVBoxLayout(cfg)
@@ -106,7 +96,6 @@ class ArchitectTab(BaseTab):
 
         layout.addWidget(cfg)
 
-        # ── Generation Options ────────────────────────────
         self._opt_group = QGroupBox(t("architect.options_group"))
         opt_layout = QVBoxLayout(self._opt_group)
         opt_layout.setSpacing(6)
@@ -120,7 +109,6 @@ class ArchitectTab(BaseTab):
             opt_layout.addWidget(chk)
         layout.addWidget(self._opt_group)
 
-        # ── Advanced ──────────────────────────────────────
         self._adv_group = QGroupBox(t("architect.advanced_group"))
         adv_layout = QVBoxLayout(self._adv_group)
         adv_layout.setSpacing(8)
@@ -159,7 +147,6 @@ class ArchitectTab(BaseTab):
         layout.addWidget(self._adv_group)
         layout.addStretch()
 
-        # ── Action buttons ────────────────────────────────
         self.gen_btn = QPushButton(t("architect.generate_btn"))
         self.gen_btn.setObjectName("primary")
         self.gen_btn.setMinimumHeight(46)
@@ -302,7 +289,6 @@ class ArchitectTab(BaseTab):
         layout.addWidget(self.code_view)
         return w
 
-    # ── Tab lifecycle ─────────────────────────────────────
     def on_settings_changed(self):
         """Refresh from settings — picked-up before next generation."""
         self.chk_git.setChecked(self.settings.auto_git_init)
@@ -335,7 +321,6 @@ class ArchitectTab(BaseTab):
         self.copy_btn.setText(t("architect.copy_code_btn"))
         self.save_btn.setText(t("architect.save_code_btn"))
 
-    # ── Generation ────────────────────────────────────────
     def _start_generation(self):
         # Validate user input
         name = self.name_input.text().strip()
@@ -394,7 +379,6 @@ class ArchitectTab(BaseTab):
         self.stop_btn.setEnabled(False)
         self._on_log("Stop requested — finishing current file…", "WARN")
 
-    # ── Worker callbacks ──────────────────────────────────
     def _on_log(self, message: str, level: str):
         from core.logger import LEVEL_ICONS
         import datetime
@@ -464,7 +448,6 @@ class ArchitectTab(BaseTab):
                 f"✗ Generation failed:\n\n{message}",
             )
 
-    # ── Tool buttons ──────────────────────────────────────
     def _open_output_folder(self):
         target = self._last_output_dir or self.settings.output_directory
         Path(target).mkdir(parents=True, exist_ok=True)
